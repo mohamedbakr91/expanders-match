@@ -24,7 +24,6 @@ export class ProjectController {
     @Param("id", ParseIntPipe) id: number,
     @CurrentUser() currentAccount: AccountTokenPayload,
   ): Promise<MatchDto[]> {
-    console.log(currentAccount);
     return this.projectService.rebuildMatches(id, currentAccount.accountId);
   }
 }
