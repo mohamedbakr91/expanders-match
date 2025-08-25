@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: expanders_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: expanders360
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: expanders_app
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: app
+      DATABASE_PASSWORD: app123
+      DATABASE_NAME: expanders360
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "
+        npm run db:create &&
+        npm run db:migrate &&
+        npm run db:seed &&
+        npm start
+      "
+
+volumes:
+  db_data:
