@@ -54,8 +54,6 @@ import { ResearchDocumentModule } from "./research-document/research-document.mo
 
       useFactory: (configService: ConfigService) => ({
         uri: configService.get<string>("mongoURL"),
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
       }),
     }),
 
