@@ -17,7 +17,7 @@ export class AnalyticController {
   constructor(private readonly analyticsService: AnalyticsService) {}
 
   @Get("top-vendors")
-  @ApiOperation({ summary: "Get top 3 vendors per country and research document counts" })
+  @ApiOperation({ summary: "Get top 3 vendors per country and research document counts (For Admins Only)" })
   @ApiResponse({
     status: 200,
     description: "Top vendors and research docs count per country",

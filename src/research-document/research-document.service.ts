@@ -32,7 +32,9 @@ export class ResearchDocumentService {
 
     const filter: FilterQuery<ResearchDocument> = {};
     if (projectId !== undefined) filter.projectId = projectId;
-    if (tag) filter.tags = tag;
+    if (tag) {
+      filter.tags = { $elemMatch: { $regex: tag, $options: "i" } };
+    }
     if (text) filter.$text = { $search: text };
 
     const [items, total] = await Promise.all([

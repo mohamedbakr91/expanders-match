@@ -140,7 +140,7 @@ export class ProjectsService {
 
   private calculateScore(vendor: Vendor, project: Project): number {
     const overlap = project.servicesNeeded.filter(s => vendor.servicesOffered.includes(s));
-    const slaWeight = vendor.responseSlaHours <= 24 ? 5 : 0;
+    const slaWeight = vendor.responseSlaHours;
 
     const rawScore = Number(overlap.length * 2 + Number(vendor.rating) + slaWeight);
 
