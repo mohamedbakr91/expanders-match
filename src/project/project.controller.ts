@@ -17,7 +17,7 @@ export class ProjectController {
 
   @Post(":id/matches/rebuild")
   @Roles(AccountRole.CLIENT)
-  @ApiOperation({ summary: "Rebuild matches for a project" })
+  @ApiOperation({ summary: "Rebuild matches for a project (Client Token Only)" })
   @ApiParam({ name: "id", type: Number, description: "Project ID" })
   @ApiResponse({ status: 200, description: "Matches rebuilt", type: [MatchDto] })
   async rebuildMatches(
