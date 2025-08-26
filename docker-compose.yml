@@ -8,9 +8,5 @@ services:
       - .env
     ports:
       - "${PORT}:${PORT}"
-    command: >
-      sh -c "
-        npm run db:migrate &&
-        npm run db:seed &&
-        npm start
-      "
+volumes:
+  db_data:
