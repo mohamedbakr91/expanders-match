@@ -3,7 +3,7 @@ set -e
 
 echo "Waiting for database to be ready..."
 
-until nc -z $DATABASE_HOST $DATABASE_PORT; do
+until nc -z $DB_HOST $DB_PORT; do
   echo "Database is unavailable - sleeping"
   sleep 2
 done
@@ -15,4 +15,4 @@ npm run db:migrate
 npm run db:seed
 
 echo "Starting application..."
-npm star
+npm start

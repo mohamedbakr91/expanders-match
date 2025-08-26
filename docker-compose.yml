@@ -1,36 +1,16 @@
 version: "3.9"
 
 services:
-  db:
-    image: mysql:8.0
-    container_name: expanders_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "${DATABASE_PORT}:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
   app:
     build: .
     container_name: expanders_app
-    depends_on:
-      - db
     env_file:
       - .env
     ports:
       - "${PORT}:${PORT}"
     command: >
       sh -c "
-        npm run db:create &&
         npm run db:migrate &&
         npm run db:seed &&
         npm start
       "
-
-volumes:
-  db_data:
