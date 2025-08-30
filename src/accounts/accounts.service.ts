@@ -20,7 +20,6 @@ export class AccountService {
   async create(createAccountDto: CreateAccountDto, manager?: EntityManager): Promise<Account> {
     this.logger.log(`Creating account: ${createAccountDto.userName}`);
     const hashedPassword = await hash(createAccountDto.password, 10);
-    console.log(hashedPassword);
     const repository = manager ? manager.getRepository(Account) : this.accountRepository;
 
     const account = repository.create({

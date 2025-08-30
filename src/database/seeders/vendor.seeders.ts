@@ -1,10 +1,13 @@
 import { Vendor } from "src/vendor/entities/vendor.entity";
-import { DataSource } from "typeorm";
+import { DataSource, EntityManager } from "typeorm";
+import { BaseSeeder } from "./accounts-clients-projects.seeders"; // Import BaseSeeder
 
-export async function seedVendors(dataSource: DataSource) {
-  const vendorRepo = dataSource.getRepository(Vendor);
+export class VendorSeeder extends BaseSeeder {
+  constructor(protected readonly dataSource: DataSource) {
+    super(dataSource);
+  }
 
-  const vendors = [
+  private readonly vendorsData = [
     {
       name: "Acme Consulting",
       countriesSupported: ["Egypt", "UAE"],
@@ -77,5 +80,23 @@ export async function seedVendors(dataSource: DataSource) {
     },
   ];
 
-  await vendorRepo.insert(vendors);
+  async run() {
+    await this.withTransaction(async entityManager => {
+      const vendorRepo = entityManager.getRepository(Vendor);
+
+      for (const vendorData of this.vendorsData) {
+        const exists = await vendorRepo.findOne({
+          where: { name: vendorData.name },
+        });
+
+        if (!exists) {
+          const newVendor = vendorRepo.create(vendorData);
+          await vendorRepo.save(newVendor);
+          console.log(`Vendor "${vendorData.name}" created successfully`);
+        } else {
+          console.log(`Vendor "${vendorData.name}" already exists`);
+        }
+      }
+    });
+  }
 }

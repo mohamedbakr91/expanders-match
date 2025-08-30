@@ -10,13 +10,6 @@ import { Match } from "src/matches/entities/match.entity";
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 async function createDatabaseIfNotExists() {
-  console.log("Environment variables:", {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    username: process.env.DB_USER,
-    database: process.env.DB_NAME,
-  });
-
   const adminDataSource = new DataSource({
     type: "mysql",
     host: process.env.DB_HOST || "localhost",
