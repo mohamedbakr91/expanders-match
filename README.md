@@ -135,12 +135,6 @@ Explore the API endpoints and their functionalities using Swagger UI:
 
 ---
 
-## 🤝 Contributing
-
-(Optional: Add guidelines for how others can contribute to your project, e.g., coding standards, pull request process, issue reporting.)
-
----
-
 ## 📄 License
 
 (Optional: Specify the license under which your project is released, e.g., MIT, Apache 2.0.)
