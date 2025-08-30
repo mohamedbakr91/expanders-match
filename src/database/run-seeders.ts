@@ -7,13 +7,12 @@ import { Account } from "src/accounts/entities/account.entity";
 import { Client } from "src/client/entities/client.entity";
 import { ProjectsService } from "src/project/project.service";
 import { Project } from "src/project/entities/project.entity";
-import { seedVendors } from "./seeders/vendor.seeders";
+import { VendorSeeder } from "./seeders/vendor.seeders";
 import { VendorsService } from "src/vendor/vendor.service";
 import { EmailService } from "src/email/email.service";
 import { Vendor } from "src/vendor/entities/vendor.entity";
 import { MatchesService } from "src/matches/matches.service";
 import { Match } from "src/matches/entities/match.entity";
-import { DataSource } from "typeorm";
 
 async function runSeeders() {
   try {
@@ -43,10 +42,11 @@ async function runSeeders() {
       emailService,
     );
 
-    const seeder = new AccountsAndClientSeeder(AppDataSource, clientService, accountService);
+    const seeder = new AccountsAndClientSeeder(AppDataSource, clientService, accountService, configService);
     await seeder.run();
 
-    await seedVendors(AppDataSource);
+    const vendorSeeder = new VendorSeeder(AppDataSource);
+    await vendorSeeder.run();
     console.log("All seeders executed successfully!");
   } catch (error) {
     console.error("Seeder error:", error);

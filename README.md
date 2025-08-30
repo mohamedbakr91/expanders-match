@@ -134,7 +134,3 @@ Explore the API endpoints and their functionalities using Swagger UI:
   [https://app-cab0ddf3-af9b-436b-afcd-536d68b73322.cleverapps.io/api/docs#/](https://app-cab0ddf3-af9b-436b-afcd-536d68b73322.cleverapps.io/api/docs#/) (Update with actual production URL if it changes)
 
 ---
-
-## 📄 License
-
-(Optional: Specify the license under which your project is released, e.g., MIT, Apache 2.0.)
